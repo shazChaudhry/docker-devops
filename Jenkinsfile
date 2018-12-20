@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'shazchaudhry/docker-centos'
+      image 'shazchaudhry/docker-centos:latest'
     }
 
   }
