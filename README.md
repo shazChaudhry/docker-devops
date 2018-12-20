@@ -1,5 +1,5 @@
 # Work In Progress
-This repo contains a two-node docker swarm cluster. Details of this cluster can be found https://github.com/shazChaudhry/vagrant
+
 
 # Instructions
 1. Create two CentOS nodes in a VirtualBox: `vagrant up; vagrant ssh`.
@@ -17,4 +17,4 @@ This repo contains a two-node docker swarm cluster. Details of this cluster can 
 ```
 1. Jenkins is accessible at http://node1:8080
 1. You will need an adminstrator password in order to unlock Jenkins: `docker container exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword`
-1. Once Jenkins has been unlocked with the admin password, select "Install suggested plugins" on customize Jenkins page. You will then need to follow the on-screen instructions to complete the setup 
+1. Once Jenkins has been unlocked with the admin password, select "Install suggested plugins" on customize Jenkins page. You will then need to follow the on-screen instructions to complete the setup
