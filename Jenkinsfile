@@ -17,5 +17,14 @@ pipeline {
         '''
       }
     }
+    stage('Build infrastructure') {
+      steps {
+        sh '''
+          cd terraform
+          terraform init
+          terraform plan
+        '''
+      }
+    }
   }
 }
