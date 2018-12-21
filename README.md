@@ -24,7 +24,8 @@ NOTE:
 1. Good and consistent internet connection
 1. Windows 10 pro machine to act as a dev environment from where to launch the automated infrastructure pipeline
 1. latest versions of [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/) and [Git BASH](https://gitforwindows.org/) are installed on the dev machine
-1. Install the vagrant-vbguest plugin: `vagrant plugin install vagrant-vbguest`
+1. Install vagrant-vbguest plugin: `vagrant plugin install vagrant-vbguest`
+1. Install vagrant-hostmanager plugin: `vagrant plugin install vagrant-hostmanager`
 
 ## Instructions
 1. Start a Git Bash shell and change to a suitable directory _(e.g. $HOME/github)_
@@ -33,15 +34,16 @@ NOTE:
 1. Change to the Vagrant synced folder: `cd /vagrant`
 1. Start [jenkinsci/blueocean](https://hub.docker.com/r/jenkinsci/blueocean) by following the command below:
 ```
-      docker container run -d \
-      --rm \
-      --user root \
-      --name jenkins \
-      --publish 8080:8080 \
-      --volume jenkins-data:/var/jenkins_home \
-      --volume /var/run/docker.sock:/var/run/docker.sock \
-      --volume $PWD:/home/github/docker-devops \
-      jenkinsci/blueocean
+        docker container run -d \
+        --rm \
+        --user root \
+        --name jenkins \
+        --publish 8080:8080 \
+        --volume jenkins-data:/var/jenkins_home \
+        --volume /var/run/docker.sock:/var/run/docker.sock \
+        --volume $PWD:/home/github \
+        --volume $HOME:/root \
+        jenkinsci/blueocean
 ```
 1. After a few moments, Jenkins should be accessible at [http://devops:8080](http://devops:8080)
 1. You will need an adminstrator password in order to unlock Jenkins: `docker container exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword`
