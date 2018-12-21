@@ -5,7 +5,7 @@ pipeline {
     }
   }
   stages {
-    stage('Build') {
+    stage('Check version of tools') {
       steps {
         sh '''
           git --version
