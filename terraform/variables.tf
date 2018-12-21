@@ -1,6 +1,6 @@
 variable "public_key_path" {
   description = "Enter the path to the SSH Public Key to add to AWS."
-  default     = "/home/root/.ssh/id_rsa.pub"
+  default     = "/root/.ssh/id_rsa.pub"
 }
 
 variable "region" {
@@ -9,7 +9,7 @@ variable "region" {
 }
 
 variable "aws_credentials" {
-  default = "/home/root/.aws/credentials"
+  default = "/root/.aws/credentials"
 }
 
 variable "key_name" {
