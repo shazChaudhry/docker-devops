@@ -24,7 +24,6 @@ pipeline {
           terraform init
           terraform destroy -auto-approve
           terraform apply -auto-approve
-          sleep 10m
         '''
       }
     }
