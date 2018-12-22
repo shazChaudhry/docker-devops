@@ -41,7 +41,6 @@ NOTE:
         --publish 8080:8080 \
         --volume jenkins-data:/var/jenkins_home \
         --volume /var/run/docker.sock:/var/run/docker.sock \
-        --volume $PWD:/home/github/docker-devops \
         --volume $HOME:/root \
         jenkinsci/blueocean
 ```
