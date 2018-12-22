@@ -26,12 +26,17 @@ NOTE:
 1. latest versions of [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/) and [Git BASH](https://gitforwindows.org/) are installed on the dev machine
 1. Install vagrant-vbguest plugin: `vagrant plugin install vagrant-vbguest`
 1. Install vagrant-hostmanager plugin: `vagrant plugin install vagrant-hostmanager`
+1. See Prerequisites in the ./terraform directory
+1. Fork this repository in GitHub as your forked repo will need to be integrated with Jenkins. Otherwise, you will not be able to modify the pipeline as per you own needs
 
-## Instructions
-1. Start a Git Bash shell and change to a suitable directory _(e.g. $HOME/github)_
-1. Clone this repo: `git clone https://github.com/shazChaudhry/docker-jenkins-pipeline.git` and change the directory _(e.g. $HOME/github/docker-jenkins-pipeline)_
+## Create centos/7 VM
+1. Start a Git Bash shell and create a suitable directory and then change to it:
+  1. mkdir -p  $HOME/github/docker-devops
+  1. cd $HOME/github/docker-devops
+1. Checkout the Vagrantfile: `wget https://raw.githubusercontent.com/shazChaudhry/docker-devops/master/Vagrantfile`
 1. Create a CentOS/7 VM in a VirtualBox and then SSH to it: `clear; vagrant destroy --force; vagrant box update; vagrant box prune; vagrant up; vagrant ssh`.
-1. Change to the Vagrant synced folder: `cd /vagrant`
+
+## Start Jenkins
 1. Start [jenkinsci/blueocean](https://hub.docker.com/r/jenkinsci/blueocean) by following the command below:
 ```
         docker container run -d \
@@ -47,3 +52,6 @@ NOTE:
 1. After a few moments, Jenkins should be accessible at [http://devops:8080](http://devops:8080)
 1. You will need an adminstrator password in order to unlock Jenkins: `docker container exec -it jenkins cat /var/jenkins_home/secrets/initialAdminPassword`
 1. Once Jenkins has been unlocked with the admin password, select "Install suggested plugins" on customize Jenkins page. You will then need to follow the on-screen instructions to complete the setup
+
+## Integrate Jeknins with the GitHub repo that you forked as part of the prerequisites above
+See "Create your Pipeline project in Blue Ocean" section at https://jenkins.io/doc/tutorials/create-a-pipeline-in-blue-ocean/ for instructions on te integration
