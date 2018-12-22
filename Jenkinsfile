@@ -22,7 +22,8 @@ pipeline {
         sh '''
           cd terraform
           terraform init
-          terraform destroy apply -auto-approve
+          terraform destroy -auto-approve
+          terraform apply -auto-approve
         '''
       }
     }

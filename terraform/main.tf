@@ -47,3 +47,13 @@ resource "aws_route_table_association" "public" {
   subnet_id      = "${aws_subnet.public.id}"
   route_table_id = "${aws_route_table.custom_routetable.id}"
 }
+
+terraform {
+  # It is expected that the bucket already exists
+  backend "s3" {
+    bucket  = "ci.terraform"
+    key     = "dev/terraform.tfstate"
+    region  = "eu-west-2"
+    encrypt = true
+  }
+}
