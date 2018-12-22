@@ -18,7 +18,7 @@ In order to achieve the stated objectives, the following will need to be automat
 NOTE:
 > The Jenkins/2 pipeline to achieve the above objectives have been tested in a [Vagrant CentOS/7 VM](https://app.vagrantup.com/centos/boxes/7) on a Windows 10 pro machine only
 
-> Vagrant CentOS/7 VM on my Windows machine was necessary as I was not able to install [Docker Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-windows). So, all the instructions below will assume your environment is similar to mine
+> Vagrant CentOS/7 VM on my Windows machine was necessary as I was not able to install [Docker Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
 
 ## Prerequisites
 1. Good and consistent internet connection
