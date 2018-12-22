@@ -25,5 +25,6 @@ Vagrant.configure("2") do |config|
     devops.vm.provision "shell", inline: "chmod 600 /home/vagrant/.ssh/*"
 		devops.vm.provision "file", source: "~/.aws", destination: "$HOME/.aws"
     devops.vm.provision "shell", inline: "chmod 600 /home/vagrant/.aws/*"
+		devops.vm.provision "shell", inline: "yum install -y epel-release && yum install -y git jq wget"
 	end
 end
