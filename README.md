@@ -31,10 +31,10 @@ NOTE:
 
 ## Create centos/7 VM
 1. Start a Git Bash shell and create a suitable directory and then change to it:
-  1. mkdir -p  $HOME/github/docker-devops
-  1. cd $HOME/github/docker-devops
-1. Checkout the Vagrantfile: `wget https://raw.githubusercontent.com/shazChaudhry/docker-devops/master/Vagrantfile`
-1. Create a CentOS/7 VM in a VirtualBox and then SSH to it: `clear; vagrant destroy --force; vagrant box update; vagrant box prune; vagrant up; vagrant ssh`.
+    - mkdir -p  /tmp/github/docker-devops
+    - cd /tmp/github/docker-devops
+1. Checkout the Vagrantfile: `curl -o Vagrantfile https://raw.githubusercontent.com/shazChaudhry/docker-devops/master/Vagrantfile`
+1. Create a CentOS/7 VM in a VirtualBox and then SSH to it: `clear; vagrant destroy --force; vagrant box update; vagrant box prune; vagrant up; vagrant ssh`
 
 ## Start Jenkins
 1. Start [jenkinsci/blueocean](https://hub.docker.com/r/jenkinsci/blueocean) by following the command below:
