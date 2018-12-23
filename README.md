@@ -18,18 +18,17 @@ In order to achieve the stated objectives, the following will need to be automat
 NOTE:
 > The Jenkins/2 pipeline to achieve the above objectives have been tested in a [Vagrant CentOS/7 VM](https://app.vagrantup.com/centos/boxes/7) on a Windows 10 pro machine only
 
-> Vagrant CentOS/7 VM on my Windows machine was necessary as I was not able to install [Docker Desktop](https://hub.docker.com/editions/community/docker-ce-desktop-windows)
-
 ## Prerequisites
-1. Good and consistent internet connection
-1. Windows 10 pro machine to act as a dev environment from where to launch the automated infrastructure pipeline
-1. latest versions of [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/) and [Git BASH](https://gitforwindows.org/) are installed on the dev machine
-1. Install vagrant-vbguest plugin: `vagrant plugin install vagrant-vbguest`
-1. Install vagrant-hostmanager plugin: `vagrant plugin install vagrant-hostmanager`
 1. See Prerequisites in the ./terraform directory
 1. Fork this repository in GitHub as your forked repo will need to be integrated with Jenkins. Otherwise, you will not be able to modify the pipeline as per you own needs
+1. The items below are only required if you are using a Windows 10 machine that does not have [Docker for Windows](https://docs.docker.com/docker-for-windows/install/) installed on it:
+    1. Windows 10 pro machine to act as a dev environment from where to launch the automated infrastructure pipeline
+    1. latest versions of [VirtualBox](https://www.virtualbox.org/wiki/Downloads), [Vagrant](https://www.vagrantup.com/) and [Git BASH](https://gitforwindows.org/) are installed on the dev machine
+    1. Install vagrant-vbguest plugin: `vagrant plugin install vagrant-vbguest`
+    1. Install vagrant-hostmanager plugin: `vagrant plugin install vagrant-hostmanager`
 
-## Create centos/7 VM
+
+## Create centos/7 VM on a Windows machine
 1. Start a Git Bash shell and create a suitable directory and then change to it:
     - mkdir -p  /tmp/github/docker-devops
     - cd /tmp/github/docker-devops
