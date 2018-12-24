@@ -12,7 +12,7 @@ Vagrant.configure("2") do |config|
 	# add the following line to your Vagrantfile:
 	config.vm.synced_folder ".", "/vagrant", type: "virtualbox"
 	# Please check the release blog for a full list of known limitations
-	config.vm.provision "docker"
+	# config.vm.provision "docker"
 	config.vm.define "devops", primary: true do |devops|
 		devops.vm.hostname = 'devops'
 		devops.vm.network :private_network, ip: "192.168.99.201"
@@ -25,6 +25,6 @@ Vagrant.configure("2") do |config|
     devops.vm.provision "shell", inline: "chmod 600 /home/vagrant/.ssh/*"
 		devops.vm.provision "file", source: "~/.aws", destination: "$HOME/.aws"
     devops.vm.provision "shell", inline: "chmod 600 /home/vagrant/.aws/*"
-		devops.vm.provision "shell", inline: "yum install -y epel-release && yum install -y git jq wget"
+		# devops.vm.provision "shell", inline: "yum install -y epel-release && yum install -y git jq wget"
 	end
 end

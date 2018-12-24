@@ -36,7 +36,7 @@ NOTE:
 1. Create a CentOS/7 VM in a VirtualBox and then SSH to it: `clear; vagrant destroy --force; vagrant box update; vagrant box prune; vagrant up; vagrant ssh`
 
 ## Start Jenkins
-1. Start [jenkinsci/blueocean](https://hub.docker.com/r/jenkinsci/blueocean) by following the command below:
+1. Start [jenkinsci/blueocean](https://hub.docker.com/r/jenkinsci/blueocean) by following the command below in your terminal:
 ```
         docker container run -d \
         --rm \
