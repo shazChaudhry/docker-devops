@@ -3,7 +3,7 @@
 
 ## Objectives
 - Create and configure a [DevOps](https://en.wikipedia.org/wiki/DevOps) environment in a public cloud; [AWS](https://aws.amazon.com/)
-- The infrastructure created will need to be reproducable and predictable
+- The infrastructure created will need to be reproducible and predictable
 - The infrastructure created will be 2x [Swarm](https://docs.docker.com/engine/swarm/) clusters to support the following:
   - [CI / CD](https://en.wikipedia.org/wiki/CI/CD) platform consisting of [GitLab](https://about.gitlab.com/), [Jenkins](https://jenkins.io/), [SonarQube](https://www.sonarqube.org/) and [Nexus](https://www.sonatype.com/)
   - Logging and Monitoring platform consisting of [Elastic Stack](https://www.elastic.co/)
@@ -54,3 +54,8 @@ NOTE:
 
 ## Integrate Jeknins with the GitHub repo that you forked as part of the prerequisites above
 See "Create your Pipeline project in Blue Ocean" section at https://jenkins.io/doc/tutorials/create-a-pipeline-in-blue-ocean/ for instructions on te integration
+
+## Improvements
+I have used Terraform and Ansible in the infrastructure provisioning and configuring part of the solution as these skills seem to be a lot in demand at the moment. However, for the purpose of achieving the stated objectives of this repo, Terraform and Ansible are strictly speaking not required. Adding layers of these technologies has made the entire solution unnecessarly more complex and difficult to manage.
+
+Instead of using Terraform and Ansible, a production grade self-healing infrastructure could much easily have been created using [Docker for AWS](https://docs.docker.com/docker-for-aws/)

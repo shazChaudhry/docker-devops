@@ -8,11 +8,11 @@ module "elk_vpc" {
   enable_dhcp_options     = true
   single_nat_gateway      = true
 
-  cidr = "10.0.0.0/16"
+  cidr = "10.0.0.0/26"
 
   azs             = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
-  private_subnets = ["10.0.1.0/24"]
-  public_subnets  = ["10.0.0.0/24"]
+  private_subnets = ["10.0.0.0/27"]
+  public_subnets  = ["10.0.0.32/27"]
 
   dhcp_options_domain_name         = "${var.DnsZoneName}"
   dhcp_options_domain_name_servers = ["AmazonProvidedDNS"]
@@ -58,4 +58,11 @@ module "elk_vpc" {
     Environment = "${var.tags[1]}"
     Terraform   = "true"
   }
+}
+
+resource "aws_vpc_endpoint" "s3" {
+  vpc_id       = "${module.elk_vpc.vpc_id}"
+  service_name = "com.amazonaws.eu-west-2.s3"
+  route_table_ids = ["${module.elk_vpc.private_route_table_ids}","${module.elk_vpc.public_route_table_ids}"]
+  auto_accept = true
 }
