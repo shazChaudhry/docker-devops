@@ -18,6 +18,6 @@
         }
       }
 ```
-- Ensure that you have an IAM role called "shaz" that have the permissions as follows. This role will be used to launch EC2 instance from where you can connect to S3 over VPC endpoint rather than the internet:
+- Ensure that you have an IAM role called "shaz" that have the permissions as follows. This role will be used to launch EC2 instances from where you can connect to S3 over VPC endpoint rather than the internet:
   - AmazonS3FullAccess
   - AdministratorAccess
