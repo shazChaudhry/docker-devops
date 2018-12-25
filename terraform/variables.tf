@@ -41,5 +41,5 @@ variable "tags" {
 }
 
 variable "elk_instance_tags" {
-  default = ["elk_master", "elk_worker_1", "worker_2"]
+  default = ["elk_master", "elk_worker_1", "elk_bastion"]
 }
