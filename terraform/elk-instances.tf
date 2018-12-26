@@ -8,7 +8,7 @@ module "elk_master" {
   associate_public_ip_address = false
   vpc_security_group_ids      = ["${module.elk_backend_app_sg.this_security_group_id}"]
   key_name                    = "personal"
-  subnet_id                   = "${module.elk_vpc.private_subnets[0]}"
+  subnet_id                   = "${module.elk_vpc.private_subnets[1]}"
 
   tags = {
     Name        = "${var.elk_instance_tags[0]}"
@@ -23,6 +23,15 @@ module "elk_master" {
   }
 }
 
+# https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resource-record-sets-values-weighted.html?shortFooter=true#rrsets-values-weighted-name
+resource "aws_route53_record" "elk_master" {
+  zone_id = "${aws_route53_zone.elk.zone_id}"
+  name    = "elk_master.${var.DnsZoneName}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${module.elk_master.private_ip}"]
+}
+
 module "elk_worker_1" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
@@ -33,7 +42,7 @@ module "elk_worker_1" {
   associate_public_ip_address = false
   vpc_security_group_ids      = ["${module.elk_backend_app_sg.this_security_group_id}"]
   key_name                    = "personal"
-  subnet_id                   = "${module.elk_vpc.private_subnets[0]}"
+  subnet_id                   = "${module.elk_vpc.private_subnets[1]}"
 
   tags = {
     Name        = "${var.elk_instance_tags[1]}"
@@ -46,6 +55,14 @@ module "elk_worker_1" {
     Owner       = "${var.tags[0]}"
     Environment = "${var.tags[1]}"
   }
+}
+
+resource "aws_route53_record" "elk_worker_1" {
+  zone_id = "${aws_route53_zone.elk.zone_id}"
+  name    = "elk_worker_1.${var.DnsZoneName}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${module.elk_worker_1.private_ip}"]
 }
 
 module "elk_bastion" {
@@ -71,4 +88,12 @@ module "elk_bastion" {
     Owner       = "${var.tags[0]}"
     Environment = "${var.tags[1]}"
   }
+}
+
+resource "aws_route53_record" "elk_bastion" {
+  zone_id = "${aws_route53_zone.elk.zone_id}"
+  name    = "elk_bastion.${var.DnsZoneName}"
+  type    = "A"
+  ttl     = "300"
+  records = ["${module.elk_bastion.private_ip}"]
 }
