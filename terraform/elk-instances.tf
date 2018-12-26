@@ -9,6 +9,10 @@ module "elk_master" {
   vpc_security_group_ids      = ["${module.elk_backend_app_sg.this_security_group_id}"]
   key_name                    = "personal"
   subnet_id                   = "${module.elk_vpc.private_subnets[1]}"
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              EOF
 
   tags = {
     Name        = "${var.elk_instance_tags[0]}"
@@ -43,6 +47,10 @@ module "elk_worker_1" {
   vpc_security_group_ids      = ["${module.elk_backend_app_sg.this_security_group_id}"]
   key_name                    = "personal"
   subnet_id                   = "${module.elk_vpc.private_subnets[1]}"
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              EOF
 
   tags = {
     Name        = "${var.elk_instance_tags[1]}"
@@ -76,6 +84,10 @@ module "elk_bastion" {
   vpc_security_group_ids      = ["${module.elk_bastion_sg.this_security_group_id}"]
   key_name                    = "personal"
   subnet_id                   = "${module.elk_vpc.public_subnets[0]}"
+  user_data = <<-EOF
+              #!/bin/bash
+              yum update -y
+              EOF
 
   tags = {
     Name        = "${var.elk_instance_tags[2]}"
