@@ -87,6 +87,7 @@ module "elk_bastion" {
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
+              pip install ansible
               EOF
 
   tags = {
