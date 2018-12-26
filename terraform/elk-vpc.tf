@@ -10,7 +10,8 @@ module "elk_vpc" {
 
   cidr = "10.0.0.0/26"
 
-  azs             = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
+  azs             = ["${data.aws_availability_zones.all.names}"]
+  # azs             = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
   private_subnets = ["10.0.0.0/28", "10.0.0.16/28"]
   public_subnets  = ["10.0.0.32/28", "10.0.0.48/28"]
 
