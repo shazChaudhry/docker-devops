@@ -1,5 +1,5 @@
 module "elk_frontend_app_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
+  source = "terraform-aws-modules/security-group/aws"
 
   name                = "elk_frontend_app_sg"
   description         = "Security Group for resources in the ELK pubic subnets"
@@ -15,7 +15,7 @@ module "elk_frontend_app_sg" {
 }
 
 module "elk_backend_app_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
+  source = "terraform-aws-modules/security-group/aws"
 
   name                = "elk_backend_app_sg"
   description         = "Security Group for resources in the ELK private subnets"
@@ -31,7 +31,7 @@ module "elk_backend_app_sg" {
 }
 
 module "elk_bastion_sg" {
-  source  = "terraform-aws-modules/security-group/aws"
+  source = "terraform-aws-modules/security-group/aws"
 
   name                = "elk_bastion_sg"
   description         = "Security Group for the bastion server in the ELK stack"
