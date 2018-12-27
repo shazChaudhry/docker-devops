@@ -15,6 +15,9 @@ module "elk_master" {
               yum install -y busybox
               echo "Hello, elk_master" > index.html
               nohup busybox httpd -f -p 8080 &
+              yum install -y docker
+              service docker start
+              usermod -a -G docker ec2-user
               EOF
 
   tags = {
@@ -56,6 +59,9 @@ module "elk_worker_1" {
               yum install -y busybox
               echo "Hello, elk_worker_1" > index.html
               nohup busybox httpd -f -p 8080 &
+              yum install -y docker
+              service docker start
+              usermod -a -G docker ec2-user
               EOF
 
   tags = {
