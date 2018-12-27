@@ -8,12 +8,12 @@ module "elk_vpc" {
   enable_dhcp_options     = true
   single_nat_gateway      = true
 
-  cidr = "10.0.0.0/26"
+  cidr = "10.0.0.0/25"
 
   azs             = ["${data.aws_availability_zones.all.names}"]
   # azs             = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
-  private_subnets = ["10.0.0.0/28", "10.0.0.16/28"]
-  public_subnets  = ["10.0.0.32/28", "10.0.0.48/28"]
+  private_subnets = ["10.0.0.0/27", "10.0.0.32/27"]
+  public_subnets  = ["10.0.0.64/27", "10.0.0.96/27"]
 
   dhcp_options_domain_name         = "${var.DnsZoneName}"
   dhcp_options_domain_name_servers = ["AmazonProvidedDNS"]
