@@ -63,3 +63,5 @@ See "Create your Pipeline project in Blue Ocean" section at https://jenkins.io/d
 In this repository, I have used Terraform and Ansible in the infrastructure provisioning and configuring part of the solution as these skills seem to be a lot in demand at the moment. However, for the purpose of achieving the stated objectives above, Terraform and Ansible are strictly speaking not required. Adding layers of these technologies has made the entire solution unnecessarily more complex and difficult to manage.
 
 Instead of using Terraform and Ansible, a production grade self-healing infrastructure could much easily be created using [Docker for AWS](https://docs.docker.com/docker-for-aws/). In my honest opinion, "Docker for AWS" is a much better option in this scenario as creating a Swarm cluster is dead simple.
+
+Please visit "Docker for AWS setup & prerequisites" page for instructions on how to create a Swarm cluster in ASWS or Azure
