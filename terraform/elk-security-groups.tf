@@ -1,47 +1,58 @@
-module "elk_frontend_app_sg" {
-  source = "terraform-aws-modules/security-group/aws"
+resource "aws_security_group" "elk_bastion_sg" {
+  name = "elk-bastion-sg"
+  vpc_id      = "${module.elk_vpc.vpc_id}"
 
-  name                = "elk_frontend_app_sg"
-  description         = "Security Group for resources in the ELK pubic subnets"
-  vpc_id              = "${module.elk_vpc.vpc_id}"
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["https-443-tcp", "http-80-tcp"]
-  egress_cidr_blocks  = ["0.0.0.0/0"]
-  egress_rules        = ["all-all"]
+  # Inbound HTTP from anywhere
+  ingress {
+    from_port = 22
+    to_port = 22
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 
-  tags = {
-    Name = "elk_frontend_app_sg"
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-module "elk_backend_app_sg" {
-  source = "terraform-aws-modules/security-group/aws"
+resource "aws_security_group" "elk_instances_sg" {
+  name = "elk-instances-sg"
+  vpc_id      = "${module.elk_vpc.vpc_id}"
 
-  name                = "elk_backend_app_sg"
-  description         = "Security Group for resources in the ELK private subnets"
-  vpc_id              = "${module.elk_vpc.vpc_id}"
-  ingress_cidr_blocks = ["${module.elk_vpc.public_subnets_cidr_blocks}"]
-  ingress_rules       = ["all-all"]
-  egress_cidr_blocks  = ["0.0.0.0/0"]
-  egress_rules        = ["all-all"]
+  # Inbound HTTP from anywhere
+  ingress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    security_groups = ["${aws_security_group.elk_bastion_sg.id}", "${aws_security_group.elk_elb_sg.id}"]
+  }
 
-  tags = {
-    Name = "elk_backend_app_sg"
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }
 
-module "elk_bastion_sg" {
-  source = "terraform-aws-modules/security-group/aws"
+resource "aws_security_group" "elk_elb_sg" {
+  name = "elk-elb-sg"
+  vpc_id      = "${module.elk_vpc.vpc_id}"
 
-  name                = "elk_bastion_sg"
-  description         = "Security Group for the bastion server in the ELK stack"
-  vpc_id              = "${module.elk_vpc.vpc_id}"
-  ingress_cidr_blocks = ["0.0.0.0/0"]
-  ingress_rules       = ["ssh-tcp"]
-  egress_cidr_blocks  = ["0.0.0.0/0"]
-  egress_rules        = ["all-all"]
+  ingress {
+    from_port = 80
+    to_port = 80
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    }
 
-  tags = {
-    Name = "elk_bastion_sg"
+  egress {
+    from_port = 0
+    to_port = 0
+    protocol = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
   }
 }

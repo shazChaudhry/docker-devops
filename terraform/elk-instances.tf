@@ -6,12 +6,15 @@ module "elk_master" {
   iam_instance_profile        = "shaz"
   name                        = "${var.elk_instance_tags[0]}"
   associate_public_ip_address = false
-  vpc_security_group_ids      = ["${module.elk_backend_app_sg.this_security_group_id}"]
+  vpc_security_group_ids      = ["${aws_security_group.elk_instances_sg.id}"]
   key_name                    = "personal"
   subnet_id                   = "${module.elk_vpc.private_subnets[1]}"
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
+              yum install -y busybox
+              echo "Hello, elk_master" > index.html
+              nohup busybox httpd -f -p 8080 &
               EOF
 
   tags = {
@@ -44,12 +47,15 @@ module "elk_worker_1" {
   iam_instance_profile        = "shaz"
   name                        = "${var.elk_instance_tags[1]}"
   associate_public_ip_address = false
-  vpc_security_group_ids      = ["${module.elk_backend_app_sg.this_security_group_id}"]
+  vpc_security_group_ids      = ["${aws_security_group.elk_instances_sg.id}"]
   key_name                    = "personal"
   subnet_id                   = "${module.elk_vpc.private_subnets[1]}"
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
+              yum install -y busybox
+              echo "Hello, elk_worker_1" > index.html
+              nohup busybox httpd -f -p 8080 &
               EOF
 
   tags = {
@@ -81,7 +87,7 @@ module "elk_bastion" {
   iam_instance_profile        = "shaz"
   name                        = "${var.elk_instance_tags[2]}"
   associate_public_ip_address = true
-  vpc_security_group_ids      = ["${module.elk_bastion_sg.this_security_group_id}"]
+  vpc_security_group_ids      = ["${aws_security_group.elk_bastion_sg.id}"]
   key_name                    = "personal"
   subnet_id                   = "${module.elk_vpc.public_subnets[0]}"
   user_data = <<-EOF
