@@ -15,6 +15,7 @@ module "elk_master" {
               yum install -y busybox
               echo "Hello, elk_master" > index.html
               nohup busybox httpd -f -p 8080 &
+              # Install docker
               yum install -y docker
               service docker start
               usermod -a -G docker ec2-user
@@ -59,6 +60,7 @@ module "elk_worker_1" {
               yum install -y busybox
               echo "Hello, elk_worker_1" > index.html
               nohup busybox httpd -f -p 8080 &
+              # Install docker
               yum install -y docker
               service docker start
               usermod -a -G docker ec2-user
@@ -99,6 +101,7 @@ module "elk_bastion" {
   user_data = <<-EOF
               #!/bin/bash
               yum update -y
+              # Install ansible
               pip install ansible
               EOF
 
