@@ -64,4 +64,4 @@ In this repository, I have used Terraform and Ansible in the infrastructure prov
 
 Instead of using Terraform and Ansible, a production grade self-healing infrastructure could much easily be created using [Docker for AWS](https://docs.docker.com/docker-for-aws/). In my honest opinion, "Docker for AWS" is a much better option in this scenario as creating a Swarm cluster is dead simple.
 
-Please visit "Docker for AWS setup & prerequisites" page for instructions on how to create a Swarm cluster in ASWS or Azure
+Please visit "Docker for AWS setup & prerequisites" page for instructions on how to create a Swarm cluster in AWS or Azure
